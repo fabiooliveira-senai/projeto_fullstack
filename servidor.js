@@ -89,11 +89,32 @@ app.get('/categorias', verificarLogin, (req, res) =>{
 
 app.post('/produtos', verificarLogin, (req, res)=>{
     const {nome_produto, preco, estoque, fk_id_categoria} = req.body;
-    pool.query('INSERT INTO tb_produtos (nome_produto, preco, estoque,      fk_id_categoria) VALUES ($1, $2, $3, $4)', 
+    pool.query('INSERT INTO tb_produtos (nome_produto, preco, estoque, fk_id_categoria) VALUES ($1, $2, $3, $4)', 
     [nome_produto, preco, estoque, fk_id_categoria], (erro, resultado)=>{
         if(erro){res.json("Falha ao cadastrar!"+erro)}
         res.redirect('/privado/area.html?msg=1')
     })
+})
+
+// Endpoint para deletar produto
+app.delete('/produtos', verificarLogin, (req, res)=>{
+  const {id_produto} = req.body;
+  pool.query('DELETE FROM tb_produtos WHERE id_produto=$1', [id_produto], (erro, resultado)=>{
+    if(erro){res.json("Falha ao deletar!"+erro)}
+    res.redirect('/privado/area.html?msg=2')
+  })
+})
+
+// Atualizar produto
+app.post('/atualizarProduto', verificarLogin, (req, res)=>{
+  const {id_produto, nome_produto, estoque, fk_id_categoria, preco} = req.body
+  pool.query(`UPDATE tb_produtos SET nome_produto=$1, estoque=$2, 
+              preco=$3, fk_id_categoria=$4 WHERE id_produto=$5`,
+            [nome_produto, estoque, preco, fk_id_categoria, id_produto],
+          (erro, resposta)=>{
+            if(erro){res.json("Falha ao atualizar!"+erro)}
+            res.redirect('/privado/area.html?msg=3')        
+          })
 })
 
 app.listen(3000, () => {

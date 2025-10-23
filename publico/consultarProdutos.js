@@ -1,6 +1,8 @@
+let todosProdutos = []
 fetch('/produtos')
 .then(res => res.json())
 .then(dados =>{
+    todosProdutos = dados
     let listaProdutos = document.getElementById("listaProdutos")
     dados.forEach(item =>{
         listaProdutos.innerHTML += `
