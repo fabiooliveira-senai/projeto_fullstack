@@ -1,0 +1,47 @@
+#listaProdutos{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.cartoes{
+    min-width: 250px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    padding: 10px;
+    transition: all 0.5s;
+}
+.cartoes:hover{
+    background-color: lightblue;
+    scale: 1.1;
+    cursor: pointer;
+}
+
+#modalEditar{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#modalEditar form{
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+}
+#btnFechar{
+    display: inline-block;
+}
+
+#btnFechar:hover{
+    cursor: pointer;
+}
